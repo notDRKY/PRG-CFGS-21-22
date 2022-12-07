@@ -1,0 +1,19 @@
+Sancionable s1 = new Tenista("Nadal"); // OK // Se crea el deportista Nadal Se crea el tenista Nadal
+s1.sancionar(5); // OK // Tenista sancionado 5 dias
+s1.jugar("Play offs"); // EC // s1 es un objeto tipo Sancionable construido con el constructor de Tenista, pero s1 no puede acceder a los métodos de Tenista.
+
+Sancionable s2 = new Golfista("Tiger"); // EC // El objeto s2 no puede llamar al constructor de la clase Golfista ya que no comparten ningún tipo de relación.
+s2.sancionar(5); // EC // El objeto s2 no existe porque no podrá ser creado, por consecuencia, este método no podra ser llamado.
+
+Deportista d1 = new Tenista("Federer"); // OK // Se crea el deportista Federer Se crea el tenista Federer
+d1.sancionar(5); // EC // El objeto d1 es un objeto de tipo Deportista construido con el constructor de la clase Tenista, pero este objeto no implementa la clase Sancionar porque sigue siendo un objeto de tipo Deportista que no tiene ninguna relación con la clase Sancionar.
+d1.retirar(); // EE // Este método por si sólo funcionaría, pero el conjunto de ejecuciones anteriores hacen que se detenga la ejecución del programa antes de que se llame a esta instrucción.
+
+d1 = new Conductor(); // EC // No se puede volver a inicializar la variable d1 a un nuevo objeto de tipo Conductor, porque d1 es u objeto de tipo Deportista y no comparte ninguna relación con Conductor, por esto no puede llamar a su constructor.
+
+d1 = new Golfista("Tiger"); // OK //Se crea el deportista Se crea el golfista Tiger
+((Sancionable)d1).sancionar(5); // EC // d1 no puede ser explicitamente un objeto de tipo Sancionable, ya que este es un tipo Deportista creado con un constructor de Golfista y ninguna de las dos clases tiene relación con Sancionable.
+((Golfista)d1).jugar(18); // EE // Este método por si sólo funcionaría, pero el conjunto de ejecuciones anteriores hacen que se detenga la ejecución del programa antes de que se llame a esta instrucción.
+
+Conductor c1 = new Conductor(); // OK // (No muestra nada por pantalla)
+c1.sancionar(5); // OK // Conductor sancionado 5 meses
